@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="description" content="Caramel — شنط وملابس حريمي | Bags & Fashion. Explore our luxury collection of women's bags and fashion." />
+    <meta name="keywords" content="Caramel, Bags, Fashion, شنط, ملابس حريمي, luxury bags, women fashion" />
+    <meta name="author" content="Caramel" />
+    <meta name="theme-color" content="#FAF7F2" />
+    <meta property="og:title" content="Caramel — Bags & Fashion | شنط وملابس حريمي" />
+    <meta property="og:description" content="Exclusive luxury bags & fashion for women. Connect with Caramel via Instagram, TikTok, and WhatsApp." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/caramel-logo.jpg" />
+
+    <link rel="icon" type="image/jpeg" href="/assets/caramel-logo.jpg" />
+    <title>Caramel — Bags &amp; Fashion | شنط وملابس حريمي</title>
+
+    <!-- Synchronous Zero-Flash Theme & Direction Bootstrap -->
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('caramel-theme');
+          if (t === 'dark' || (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+          }
+          var l = localStorage.getItem('caramel-lang');
+          if (l === 'ar') {
+            document.documentElement.lang = 'ar';
+            document.documentElement.dir = 'rtl';
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Critical CSS to paint instantly with zero flash -->
+    <style>
+      :root {
+        --bg-primary: #FAF7F2;
+        --text-primary: #341D12;
+      }
+      [data-theme='dark'] {
+        --bg-primary: #1C100A;
+        --text-primary: #FAF7F2;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      }
+    </style>
+
+    <!-- Critical High-Priority LCP Image Preload -->
+    <link rel="preload" as="image" href="/assets/caramel-logo.avif" type="image/avif" fetchpriority="high" />
+
+    <!-- Google Fonts: Asynchronous Non-Blocking Loading with swap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=Tajawal:wght@500;700&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=Tajawal:wght@500;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=Tajawal:wght@500;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

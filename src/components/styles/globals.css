@@ -1,0 +1,976 @@
+/* ==============================================================================
+   CARAMEL — LUXURY FASHION DESIGN SYSTEM & GLOBAL STYLES
+   ============================================================================== */
+
+:root {
+  /* Brand Palette Design Tokens */
+  --color-warm-ivory: #FAF7F2;
+  --color-soft-beige: #E9D8C3;
+  --color-caramel: #B87945;
+  --color-caramel-rich: #8B542F;
+  --color-espresso: #452719;
+  --color-champagne-gold: #D5B078;
+  --color-gold-light: #F2DEC0;
+
+  /* Default (Light) Theme Variables */
+  --bg-primary: #FAF7F2;
+  --bg-secondary: #F3ECE1;
+  --bg-card: rgba(255, 255, 255, 0.75);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  --bg-floating-card: #FFFFFF;
+  
+  --text-primary: #341D12;
+  --text-secondary: #744D34;
+  --text-muted: #9E745A;
+  --text-accent: #B87945;
+
+  --border-subtle: rgba(184, 121, 69, 0.2);
+  --border-medium: rgba(184, 121, 69, 0.35);
+  --border-glow: rgba(213, 176, 120, 0.5);
+
+  --shadow-sm: 0 4px 12px rgba(69, 39, 25, 0.05);
+  --shadow-md: 0 12px 30px rgba(69, 39, 25, 0.08);
+  --shadow-lg: 0 20px 50px rgba(69, 39, 25, 0.12);
+  --shadow-glow: 0 0 35px rgba(213, 176, 120, 0.35);
+  --fashion-shadow: drop-shadow(0 25px 35px rgba(69, 39, 25, 0.18));
+
+  --ambient-radial-1: radial-gradient(circle at 50% 35%, rgba(242, 222, 192, 0.6) 0%, rgba(250, 247, 242, 0) 70%);
+  --ambient-radial-2: radial-gradient(circle at 85% 20%, rgba(233, 216, 195, 0.5) 0%, transparent 60%);
+  --ambient-radial-3: radial-gradient(circle at 15% 80%, rgba(184, 121, 69, 0.12) 0%, transparent 60%);
+
+  /* Typography */
+  --font-display-en: 'Cormorant Garamond', Georgia, serif;
+  --font-sans-en: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display-ar: 'Tajawal', 'Cairo', serif;
+  --font-sans-ar: 'Cairo', 'Tajawal', system-ui, sans-serif;
+
+  --transition-theme: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Dark Theme Variables */
+[data-theme='dark'] {
+  --bg-primary: #1C100A;
+  --bg-secondary: #27170F;
+  --bg-card: rgba(43, 25, 17, 0.7);
+  --bg-card-hover: rgba(58, 33, 22, 0.9);
+  --bg-floating-card: #2B1911;
+
+  --text-primary: #FAF7F2;
+  --text-secondary: #E9D8C3;
+  --text-muted: #B89981;
+  --text-accent: #D5B078;
+
+  --border-subtle: rgba(213, 176, 120, 0.2);
+  --border-medium: rgba(213, 176, 120, 0.35);
+  --border-glow: rgba(213, 176, 120, 0.6);
+
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 45px rgba(213, 176, 120, 0.25);
+  --fashion-shadow: drop-shadow(0 25px 40px rgba(0, 0, 0, 0.55));
+
+  --ambient-radial-1: radial-gradient(circle at 50% 35%, rgba(139, 84, 47, 0.28) 0%, rgba(28, 16, 10, 0) 70%);
+  --ambient-radial-2: radial-gradient(circle at 85% 20%, rgba(213, 176, 120, 0.12) 0%, transparent 60%);
+  --ambient-radial-3: radial-gradient(circle at 15% 80%, rgba(69, 39, 25, 0.5) 0%, transparent 60%);
+}
+
+/* CSS Reset & Foundation */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans-en);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: var(--transition-theme);
+}
+
+body[dir='rtl'] {
+  font-family: var(--font-sans-ar);
+}
+
+/* Luxury Viewport Container */
+.caramel-app-container {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+  transition: var(--transition-theme);
+  isolation: isolate;
+}
+
+/* Atmospheric Layered Background */
+.caramel-ambient-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.caramel-ambient-glow {
+  position: absolute;
+  inset: 0;
+  background-image: var(--ambient-radial-1), var(--ambient-radial-2), var(--ambient-radial-3);
+  opacity: 0.95;
+  transition: opacity 0.5s ease;
+}
+
+/* Dynamic Interactive Studio Spotlight that tracks cursor position */
+.caramel-dynamic-spotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle 650px at var(--pointer-x, 50%) var(--pointer-y, 40%),
+    rgba(213, 176, 120, 0.2) 0%,
+    rgba(184, 121, 69, 0.06) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.5s ease;
+}
+
+[data-theme='dark'] .caramel-dynamic-spotlight {
+  background: radial-gradient(
+    circle 600px at var(--pointer-x, 50%) var(--pointer-y, 40%),
+    rgba(213, 176, 120, 0.25) 0%,
+    rgba(69, 39, 25, 0.12) 40%,
+    transparent 65%
+  );
+}
+
+/* Subtle luxury grain texture (lightweight pre-rendered tile, zero runtime filter overhead) */
+.caramel-grain-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url('/assets/noise.png');
+  background-repeat: repeat;
+  pointer-events: none;
+}
+
+/* Top Header Bar */
+.caramel-header {
+  position: relative;
+  z-index: 50;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem 0.5rem;
+}
+
+.caramel-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+body[dir='rtl'] .caramel-header-actions {
+  margin-left: unset;
+  margin-right: auto;
+}
+
+/* Elegant Pill Buttons (Language / Theme) */
+.luxury-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  border-radius: 9999px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  user-select: none;
+}
+
+.luxury-pill-btn:hover {
+  background-color: var(--bg-card-hover);
+  border-color: var(--color-champagne-gold);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), 0 0 16px var(--border-glow);
+  color: var(--text-accent);
+}
+
+.luxury-pill-btn:focus-visible {
+  border-color: var(--color-champagne-gold);
+  box-shadow: 0 0 0 3px var(--border-glow);
+}
+
+.luxury-pill-btn svg {
+  font-size: 1.05rem;
+  transition: transform 0.4s ease;
+}
+
+.luxury-pill-btn:hover svg {
+  transform: scale(1.12);
+}
+
+/* Hero / Interactive Parallax Canvas */
+.caramel-hero-stage {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1400px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  min-height: calc(100svh - 140px);
+}
+
+/* Floating Fashion Object Architecture */
+.fashion-parallax-viewport {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* Separation of pointer motion and idle floating */
+.fashion-item-anchor {
+  position: absolute;
+  pointer-events: auto;
+  will-change: transform;
+  transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.fashion-item-idle {
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+.fashion-item-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: var(--fashion-shadow);
+  transition: filter 0.4s ease, transform 0.4s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.fashion-item-anchor:hover .fashion-item-img {
+  filter: var(--fashion-shadow), drop-shadow(0 0 20px var(--border-glow));
+}
+
+/* Specific Fashion Item Anchor Placements & Scales */
+
+/* 1. Caramel Handbag (Hero Bottom Left / Center Left) */
+.item-handbag-caramel {
+  bottom: 8%;
+  left: 6%;
+  width: clamp(160px, 20vw, 290px);
+  z-index: 12;
+}
+.item-handbag-caramel .fashion-item-idle {
+  animation-name: idleFloatGentle;
+  animation-duration: 6.8s;
+}
+
+/* 2. Dark Espresso Quilted Handbag (Top Right) */
+.item-handbag-dark {
+  top: 8%;
+  right: 7%;
+  width: clamp(150px, 18vw, 260px);
+  z-index: 11;
+}
+.item-handbag-dark .fashion-item-idle {
+  animation-name: idleFloatSlow;
+  animation-duration: 7.6s;
+  animation-delay: -2s;
+}
+
+/* 3. Flowing Silk Evening Dress (Bottom Right) */
+.item-dress-elegant {
+  bottom: 4%;
+  right: 5%;
+  width: clamp(180px, 22vw, 320px);
+  z-index: 8;
+  opacity: 0.92;
+}
+.item-dress-elegant .fashion-item-img {
+  filter: var(--fashion-shadow) blur(0.7px);
+  transition: filter 0.5s ease;
+}
+.item-dress-elegant:hover .fashion-item-img {
+  filter: var(--fashion-shadow), drop-shadow(0 0 20px var(--border-glow));
+}
+.item-dress-elegant .fashion-item-idle {
+  animation-name: idleFloatSway;
+  animation-duration: 8.4s;
+  animation-delay: -3.5s;
+}
+
+/* 4. Tweed Bouclé Jacket (Top Left) */
+.item-jacket-boucle {
+  top: 6%;
+  left: 5%;
+  width: clamp(160px, 19vw, 270px);
+  z-index: 9;
+}
+.item-jacket-boucle .fashion-item-idle {
+  animation-name: idleFloatGentle;
+  animation-duration: 7.2s;
+  animation-delay: -1.2s;
+}
+
+/* 5. Luxury Cat-Eye Sunglasses (Restrained Accessory, Floating Mid Left) */
+.item-sunglasses {
+  top: 48%;
+  left: 3%;
+  width: clamp(110px, 12vw, 170px);
+  z-index: 13;
+  opacity: 0.94;
+}
+.item-sunglasses .fashion-item-idle {
+  animation-name: idleFloatSlow;
+  animation-duration: 5.8s;
+  animation-delay: -4s;
+}
+
+/* Idle Floating Keyframe Animations */
+@keyframes idleFloatGentle {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.2deg);
+  }
+  100% {
+    transform: translateY(6px) rotate(-0.8deg);
+  }
+}
+
+@keyframes idleFloatSlow {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(12px) rotate(-1.5deg);
+  }
+  100% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes idleFloatSway {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1.8deg);
+  }
+  100% {
+    transform: translateY(10px) rotate(-1.2deg);
+  }
+}
+
+/* Central Brand Showcase Card */
+.caramel-brand-center {
+  position: relative;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  padding: 2.25rem 2rem;
+  border-radius: 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.caramel-brand-center:hover {
+  border-color: var(--color-champagne-gold);
+  box-shadow: var(--shadow-lg), 0 0 50px var(--border-glow);
+}
+
+/* Brand Logo Display */
+.brand-logo-frame {
+  position: relative;
+  width: clamp(140px, 22vw, 210px);
+  height: clamp(180px, 28vw, 260px);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #FFFFFF 60%, #FAF7F2 100%);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 8px 24px rgba(69, 39, 25, 0.08), inset 0 0 20px rgba(213, 176, 120, 0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+[data-theme='dark'] .brand-logo-frame {
+  background: radial-gradient(circle at center, #FAF7F2 85%, #E9D8C3 100%);
+  border-color: var(--color-champagne-gold);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(213, 176, 120, 0.3);
+}
+
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.5rem;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.caramel-brand-center:hover .brand-logo-img {
+  transform: scale(1.03);
+}
+
+/* Brand Titles & Typography */
+.brand-title-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1.5rem;
+}
+
+.brand-title {
+  font-family: var(--font-display-en);
+  font-size: clamp(2rem, 4.2vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  line-height: 1.15;
+  text-transform: capitalize;
+  text-shadow: 0 2px 10px rgba(184, 121, 69, 0.15);
+  transition: color 0.3s ease;
+}
+
+body[dir='rtl'] .brand-title {
+  font-family: var(--font-display-ar);
+  font-size: clamp(2.2rem, 4.6vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+[data-theme='dark'] .brand-title {
+  color: #FAF7F2;
+  text-shadow: 0 2px 15px rgba(213, 176, 120, 0.25);
+}
+
+.brand-subtitle-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 1.1rem;
+  border-radius: 9999px;
+  background: rgba(184, 121, 69, 0.08);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-accent);
+  font-family: var(--font-sans-en);
+  font-size: clamp(0.72rem, 1.8vw, 0.85rem);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+body[dir='rtl'] .brand-subtitle-badge {
+  font-family: var(--font-sans-ar);
+  letter-spacing: 0.05em;
+  font-size: clamp(0.85rem, 2vw, 0.98rem);
+}
+
+[data-theme='dark'] .brand-subtitle-badge {
+  background: rgba(213, 176, 120, 0.1);
+  color: var(--color-champagne-gold);
+}
+
+.brand-tagline {
+  margin-top: 0.25rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-family: var(--font-display-en);
+}
+
+body[dir='rtl'] .brand-tagline {
+  font-family: var(--font-display-ar);
+  font-style: normal;
+}
+
+/* Social Buttons Row (Instagram, TikTok, WhatsApp) */
+.social-buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  width: 100%;
+}
+
+.social-action-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 1.45rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  cursor: pointer;
+}
+
+.social-action-btn:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: var(--shadow-md), 0 0 25px var(--border-glow);
+  color: #FFFFFF;
+  border-color: transparent;
+}
+
+.social-action-btn:focus-visible {
+  box-shadow: 0 0 0 3px var(--border-glow), var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Individual Brand Platform Hover Accents */
+.social-btn-instagram:hover {
+  background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF);
+}
+
+.social-btn-tiktok:hover {
+  background: #010101;
+  color: #FFFFFF;
+  box-shadow: 0 0 20px rgba(254, 44, 85, 0.4), 0 0 20px rgba(37, 244, 238, 0.3);
+}
+
+[data-theme='dark'] .social-btn-tiktok:hover {
+  background: #111111;
+  border-color: #25F4EE;
+}
+
+.social-btn-whatsapp:hover {
+  background: #25D366;
+}
+
+/* Tooltip on Social Action Buttons */
+.social-tooltip {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  background: var(--bg-floating-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.social-action-btn:hover .social-tooltip,
+.social-action-btn:focus-visible .social-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Luxury Footer with Developer Credit */
+.caramel-footer {
+  position: relative;
+  z-index: 50;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25rem 1.5rem 1.75rem;
+  text-align: center;
+}
+
+.footer-content-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.footer-copyright-line {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  font-family: inherit;
+}
+
+.footer-developer-line {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.footer-developer-link {
+  font-weight: 700;
+  color: var(--color-champagne-gold);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  position: relative;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-shadow: 0 0 10px rgba(213, 176, 120, 0.3);
+}
+
+.footer-developer-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0.35rem;
+  right: 0.35rem;
+  height: 1px;
+  background-color: var(--color-champagne-gold);
+  opacity: 0.6;
+  transform: scaleX(0.7);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-developer-link:hover {
+  color: #EAC996;
+  text-shadow: 0 0 16px rgba(213, 176, 120, 0.7);
+  transform: translateY(-1px);
+}
+
+.footer-developer-link:hover::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.footer-developer-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-champagne-gold);
+}
+
+/* Floating WhatsApp Contact Button at Bottom Left */
+.caramel-floating-chat-wrap {
+  position: fixed;
+  bottom: clamp(1.2rem, 3vw, 2rem);
+  left: clamp(1.2rem, 3vw, 2rem);
+  z-index: 99;
+}
+
+.caramel-floating-whatsapp-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #FFFFFF;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.38), 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  outline: none;
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.caramel-floating-whatsapp-btn:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5), 0 0 25px rgba(37, 211, 102, 0.4);
+}
+
+.caramel-floating-whatsapp-btn:focus-visible {
+  box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px #25D366;
+}
+
+.floating-whatsapp-tooltip {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 12px);
+  transform: translateY(-50%) translateX(-4px);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  background: var(--bg-floating-card);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: var(--shadow-md);
+}
+
+body[dir='rtl'] .floating-whatsapp-tooltip {
+  left: auto;
+  right: calc(100% + 12px);
+  transform: translateY(-50%) translateX(4px);
+}
+
+.caramel-floating-whatsapp-btn:hover .floating-whatsapp-tooltip,
+.caramel-floating-whatsapp-btn:focus-visible .floating-whatsapp-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+.floating-chat-notice,
+.footer-dev-notice {
+  bottom: 5.5rem;
+  left: clamp(1.2rem, 3vw, 2rem);
+  transform: none;
+}
+
+/* Safety Toast / Modal for Unconfigured Social Link */
+.placeholder-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  max-width: 440px;
+  width: 90%;
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  background: var(--bg-floating-card);
+  border: 1px solid var(--color-champagne-gold);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-lg), 0 0 30px var(--border-glow);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  animation: slideUpFade 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.toast-icon {
+  color: var(--color-caramel);
+  font-size: 1.35rem;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.toast-content {
+  flex: 1;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.toast-title {
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  color: var(--text-accent);
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.toast-close:hover {
+  color: var(--text-primary);
+}
+
+/* ==============================================================================
+   RESPONSIVE DESIGN SYSTEM
+   ============================================================================== */
+
+/* Tablets & Small Laptops (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .item-handbag-caramel {
+    left: 3%;
+    bottom: 5%;
+    width: clamp(140px, 20vw, 220px);
+  }
+  .item-handbag-dark {
+    right: 4%;
+    top: 6%;
+    width: clamp(130px, 18vw, 210px);
+  }
+  .item-dress-elegant {
+    right: 3%;
+    bottom: 3%;
+    width: clamp(150px, 20vw, 240px);
+  }
+  .item-jacket-boucle {
+    left: 3%;
+    top: 6%;
+    width: clamp(140px, 19vw, 220px);
+  }
+  .item-sunglasses {
+    display: none; /* Keep composition clean on medium screens */
+  }
+}
+
+/* Mobile Screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .caramel-header {
+    padding: 1.2rem 1.25rem 0.25rem;
+  }
+
+  .caramel-hero-stage {
+    min-height: auto;
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .caramel-brand-center {
+    padding: 1.75rem 1.25rem;
+    max-width: 92%;
+    border-radius: 24px;
+  }
+
+  .brand-logo-frame {
+    width: 130px;
+    height: 165px;
+    margin-bottom: 1rem;
+  }
+
+  .brand-title {
+    font-size: 2.1rem;
+  }
+
+  .brand-subtitle-badge {
+    padding: 0.3rem 0.85rem;
+    letter-spacing: 0.16em;
+  }
+
+  .social-action-btn {
+    width: 52px;
+    height: 52px;
+    font-size: 1.3rem;
+  }
+
+  .fashion-item-anchor {
+    pointer-events: none; /* Never intercept touches or taps on mobile */
+  }
+
+  /* On mobile: keep 2 subtle decorative background items with reduced opacity & size so brand is center-stage */
+  .item-handbag-caramel {
+    bottom: -20px;
+    left: -20px;
+    width: 120px;
+    opacity: 0.65;
+  }
+
+  .item-handbag-dark {
+    top: 20px;
+    right: -15px;
+    width: 110px;
+    opacity: 0.65;
+  }
+
+  .item-dress-elegant {
+    display: none;
+  }
+
+  .item-jacket-boucle {
+    display: none;
+  }
+
+  .item-sunglasses {
+    display: none;
+  }
+}
+
+/* Extra Small Mobile (max-width: 380px) */
+@media (max-width: 380px) {
+  .brand-logo-frame {
+    width: 115px;
+    height: 145px;
+  }
+  .brand-title {
+    font-size: 1.55rem;
+  }
+  .social-buttons-container {
+    gap: 0.8rem;
+  }
+  .social-action-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Prefers-reduced-motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .fashion-item-idle {
+    animation: none !important;
+  }
+  .fashion-item-anchor {
+    transition: none !important;
+    transform: none !important;
+  }
+  .caramel-brand-center,
+  .luxury-pill-btn,
+  .social-action-btn,
+  .brand-logo-img {
+    transition: none !important;
+  }
+}
