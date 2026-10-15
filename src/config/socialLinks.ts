@@ -36,7 +36,7 @@ export const WHATSAPP_CHANNEL_URL =
 
 /** Floating WhatsApp Direct Chat Configuration (opens from the bottom-left floating button) */
 export const WHATSAPP_CHAT_CONFIG: WhatsAppChatConfig = {
-  phoneNumberDigits: '',
+  phoneNumberDigits: '201095203967',
   defaultMessageEn: 'Hello Caramel! I would like to inquire about your bags & fashion collection.',
   defaultMessageAr: 'مرحباً كراميل! أود الاستفسار عن كولكشن الشنط والملابس.',
 };
