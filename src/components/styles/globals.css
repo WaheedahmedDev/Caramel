@@ -107,7 +107,8 @@ body[dir='rtl'] {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: var(--bg-primary);
   transition: var(--transition-theme);
   isolation: isolate;
@@ -842,63 +843,49 @@ body[dir='rtl'] .floating-whatsapp-tooltip {
    RESPONSIVE DESIGN SYSTEM
    ============================================================================== */
 
-/* Tablets & Small Laptops (max-width: 1024px) */
-@media (max-width: 1024px) {
-  .item-handbag-caramel {
-    left: 3%;
-    bottom: 5%;
-    width: clamp(140px, 20vw, 220px);
-  }
-  .item-handbag-dark {
-    right: 4%;
-    top: 6%;
-    width: clamp(130px, 18vw, 210px);
-  }
-  .item-dress-elegant {
-    right: 3%;
-    bottom: 3%;
-    width: clamp(150px, 20vw, 240px);
-  }
-  .item-jacket-boucle {
-    left: 3%;
-    top: 6%;
-    width: clamp(140px, 19vw, 220px);
-  }
-  .item-sunglasses {
-    display: none; /* Keep composition clean on medium screens */
-  }
-}
-
-/* Mobile Screens (max-width: 768px) */
-@media (max-width: 768px) {
+/* ------------------------------------------------------------------------------
+   1. TABLETS & PORTRAIT TABLETS (768px – 1024px)
+   ------------------------------------------------------------------------------ */
+@media (min-width: 769px) and (max-width: 1024px) {
   .caramel-header {
-    padding: 1.2rem 1.25rem 0.25rem;
+    padding: 1.25rem 2rem 0.5rem;
   }
 
   .caramel-hero-stage {
-    min-height: auto;
-    padding: 1.5rem 1rem 2rem;
+    min-height: calc(100svh - 130px);
+    padding: 1rem 1.5rem;
   }
 
+  /* Central Card on Tablet */
   .caramel-brand-center {
-    padding: 1.75rem 1.25rem;
-    max-width: 92%;
+    width: clamp(340px, 46vw, 410px);
+    padding: 1.85rem 1.6rem;
     border-radius: 24px;
   }
 
   .brand-logo-frame {
-    width: 130px;
-    height: 165px;
+    width: 150px;
+    height: 185px;
     margin-bottom: 1rem;
+    border-radius: 18px;
   }
 
   .brand-title {
-    font-size: 2.1rem;
+    font-size: 2.3rem;
+  }
+
+  body[dir='rtl'] .brand-title {
+    font-size: 2.45rem;
   }
 
   .brand-subtitle-badge {
-    padding: 0.3rem 0.85rem;
-    letter-spacing: 0.16em;
+    padding: 0.32rem 0.95rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+  }
+
+  .social-buttons-container {
+    gap: 0.95rem;
   }
 
   .social-action-btn {
@@ -907,54 +894,438 @@ body[dir='rtl'] .floating-whatsapp-tooltip {
     font-size: 1.3rem;
   }
 
-  .fashion-item-anchor {
-    pointer-events: none; /* Never intercept touches or taps on mobile */
+  /* Surrounding Fashion Objects on Tablet (Balanced 4-corner arrangement) */
+  /* Left Side: Bouclé Jacket (top) & Caramel Leather Handbag (bottom) */
+  .item-jacket-boucle {
+    top: 5%;
+    left: 3%;
+    width: clamp(140px, 19vw, 210px);
+    z-index: 9;
+    display: block !important;
+    opacity: 0.96;
   }
 
-  /* On mobile: keep 2 subtle decorative background items with reduced opacity & size so brand is center-stage */
   .item-handbag-caramel {
-    bottom: -20px;
-    left: -20px;
-    width: 120px;
-    opacity: 0.65;
+    bottom: 6%;
+    left: 4%;
+    width: clamp(145px, 20vw, 220px);
+    z-index: 12;
+    display: block !important;
+    opacity: 0.98;
   }
 
+  /* Right Side: Dark Espresso Handbag (top) & Silk Evening Dress (bottom) */
   .item-handbag-dark {
-    top: 20px;
-    right: -15px;
-    width: 110px;
-    opacity: 0.65;
+    top: 6%;
+    right: 4%;
+    width: clamp(135px, 18vw, 200px);
+    z-index: 11;
+    display: block !important;
+    opacity: 0.98;
   }
 
   .item-dress-elegant {
-    display: none;
+    bottom: 4%;
+    right: 3%;
+    width: clamp(160px, 21vw, 240px);
+    z-index: 8;
+    display: block !important;
+    opacity: 0.92;
   }
 
+  /* Subtle accent accessory */
+  .item-sunglasses {
+    top: 48%;
+    left: 1.5%;
+    width: clamp(85px, 10vw, 115px);
+    z-index: 13;
+    display: block !important;
+    opacity: 0.88;
+  }
+}
+
+/* ------------------------------------------------------------------------------
+   2. LARGE PHONES & SMALL TABLETS (431px – 768px)
+   ------------------------------------------------------------------------------ */
+@media (min-width: 431px) and (max-width: 768px) {
+  .caramel-header {
+    padding: 1.1rem 1.35rem 0.25rem;
+  }
+
+  .caramel-hero-stage {
+    min-height: clamp(520px, calc(100svh - 120px), 720px);
+    padding: 1rem 0.85rem 1.5rem;
+  }
+
+  /* Central Card */
+  .caramel-brand-center {
+    width: clamp(290px, 64vw, 350px);
+    padding: 1.5rem 1.25rem;
+    border-radius: 22px;
+  }
+
+  .brand-logo-frame {
+    width: 115px;
+    height: 142px;
+    margin-bottom: 0.85rem;
+    border-radius: 16px;
+  }
+
+  .brand-title-wrap {
+    margin-bottom: 1.1rem;
+    gap: 0.25rem;
+  }
+
+  .brand-title {
+    font-size: 1.88rem;
+  }
+
+  body[dir='rtl'] .brand-title {
+    font-size: 2.05rem;
+  }
+
+  .brand-subtitle-badge {
+    padding: 0.28rem 0.85rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+  }
+
+  .brand-tagline {
+    font-size: 0.8rem;
+  }
+
+  .social-buttons-container {
+    gap: 0.85rem;
+  }
+
+  .social-action-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 1.22rem;
+  }
+
+  .fashion-item-anchor {
+    pointer-events: none;
+  }
+
+  /* Left Side: Jacket & Caramel Handbag visible and framing the card */
   .item-jacket-boucle {
-    display: none;
+    top: 4%;
+    left: 2%;
+    width: clamp(112px, 22vw, 155px);
+    z-index: 9;
+    display: block !important;
+    opacity: 0.94;
+  }
+
+  .item-handbag-caramel {
+    bottom: 5%;
+    left: 2%;
+    width: clamp(118px, 24vw, 165px);
+    z-index: 12;
+    display: block !important;
+    opacity: 0.96;
+  }
+
+  /* Right Side: Dark Handbag & Elegant Silk Dress visible and framing the card */
+  .item-handbag-dark {
+    top: 5%;
+    right: 2%;
+    width: clamp(110px, 22vw, 150px);
+    z-index: 11;
+    display: block !important;
+    opacity: 0.96;
+  }
+
+  .item-dress-elegant {
+    bottom: 4%;
+    right: 1.5%;
+    width: clamp(128px, 25vw, 175px);
+    z-index: 8;
+    display: block !important;
+    opacity: 0.9;
   }
 
   .item-sunglasses {
     display: none;
   }
+
+  .caramel-footer {
+    padding: 0.85rem 4.5rem 1.25rem;
+  }
+
+  .caramel-floating-chat-wrap {
+    bottom: 1.1rem;
+    left: 1.1rem;
+  }
+
+  .caramel-floating-whatsapp-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
+  }
 }
 
-/* Extra Small Mobile (max-width: 380px) */
-@media (max-width: 380px) {
+/* ------------------------------------------------------------------------------
+   3. STANDARD PHONES (375px – 430px)
+   ------------------------------------------------------------------------------ */
+@media (min-width: 375px) and (max-width: 430px) {
+  .caramel-header {
+    padding: 1rem 1rem 0.2rem;
+  }
+
+  .caramel-hero-stage {
+    min-height: clamp(480px, calc(100svh - 110px), 640px);
+    padding: 0.75rem 0.5rem 1.25rem;
+  }
+
+  /* Central Card */
+  .caramel-brand-center {
+    width: clamp(265px, 75vw, 305px);
+    padding: 1.3rem 1rem;
+    border-radius: 20px;
+  }
+
   .brand-logo-frame {
-    width: 115px;
-    height: 145px;
+    width: 102px;
+    height: 126px;
+    margin-bottom: 0.7rem;
+    border-radius: 14px;
   }
+
+  .brand-title-wrap {
+    margin-bottom: 0.9rem;
+    gap: 0.2rem;
+  }
+
   .brand-title {
-    font-size: 1.55rem;
+    font-size: 1.68rem;
   }
+
+  body[dir='rtl'] .brand-title {
+    font-size: 1.85rem;
+  }
+
+  .brand-subtitle-badge {
+    padding: 0.24rem 0.72rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+  }
+
+  .brand-tagline {
+    font-size: 0.74rem;
+    margin-top: 0.12rem;
+  }
+
   .social-buttons-container {
-    gap: 0.8rem;
+    gap: 0.75rem;
   }
+
   .social-action-btn {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.15rem;
+  }
+
+  .fashion-item-anchor {
+    pointer-events: none;
+  }
+
+  /* Left Side: Bouclé Jacket & Caramel Handbag */
+  .item-jacket-boucle {
+    top: 2.5%;
+    left: 1%;
+    width: clamp(92px, 24vw, 118px);
+    z-index: 9;
+    display: block !important;
+    opacity: 0.92;
+  }
+
+  .item-handbag-caramel {
+    bottom: 3%;
+    left: 1%;
+    width: clamp(96px, 25vw, 126px);
+    z-index: 12;
+    display: block !important;
+    opacity: 0.95;
+  }
+
+  /* Right Side: Dark Espresso Handbag & Silk Evening Dress */
+  .item-handbag-dark {
+    top: 3%;
+    right: 1.5%;
+    width: clamp(90px, 23vw, 115px);
+    z-index: 11;
+    display: block !important;
+    opacity: 0.95;
+  }
+
+  .item-dress-elegant {
+    bottom: 2.5%;
+    right: 1%;
+    width: clamp(105px, 27vw, 138px);
+    z-index: 8;
+    display: block !important;
+    opacity: 0.9;
+  }
+
+  .item-sunglasses {
+    display: none;
+  }
+
+  .caramel-footer {
+    padding: 0.75rem 4.2rem 1.25rem;
+  }
+
+  .footer-copyright-line,
+  .footer-developer-line {
+    font-size: 0.75rem;
+  }
+
+  .caramel-floating-chat-wrap {
+    bottom: 1rem;
+    left: 1rem;
+  }
+
+  .caramel-floating-whatsapp-btn {
+    width: 46px;
+    height: 46px;
     font-size: 1.2rem;
+  }
+}
+
+/* ------------------------------------------------------------------------------
+   4. SMALL PHONES (320px – 374px)
+   ------------------------------------------------------------------------------ */
+@media (max-width: 374px) {
+  .caramel-header {
+    padding: 0.85rem 0.85rem 0.15rem;
+  }
+
+  .luxury-pill-btn {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.78rem;
+    gap: 0.35rem;
+  }
+
+  .caramel-hero-stage {
+    min-height: clamp(450px, calc(100svh - 100px), 580px);
+    padding: 0.5rem 0.35rem 1rem;
+  }
+
+  /* Central Card */
+  .caramel-brand-center {
+    width: min(248px, 77vw);
+    padding: 1.1rem 0.85rem;
+    border-radius: 18px;
+  }
+
+  .brand-logo-frame {
+    width: 86px;
+    height: 106px;
+    margin-bottom: 0.55rem;
+    border-radius: 12px;
+  }
+
+  .brand-title-wrap {
+    margin-bottom: 0.75rem;
+    gap: 0.15rem;
+  }
+
+  .brand-title {
+    font-size: 1.45rem;
+  }
+
+  body[dir='rtl'] .brand-title {
+    font-size: 1.6rem;
+  }
+
+  .brand-subtitle-badge {
+    padding: 0.2rem 0.55rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  .brand-tagline {
+    font-size: 0.68rem;
+    margin-top: 0.1rem;
+    line-height: 1.25;
+  }
+
+  .social-buttons-container {
+    gap: 0.65rem;
+  }
+
+  .social-action-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.05rem;
+  }
+
+  .fashion-item-anchor {
+    pointer-events: none;
+  }
+
+  /* Left Side: Jacket & Caramel Handbag visible and framing the card */
+  .item-jacket-boucle {
+    top: 2%;
+    left: 0%;
+    width: 82px;
+    z-index: 9;
+    display: block !important;
+    opacity: 0.9;
+  }
+
+  .item-handbag-caramel {
+    bottom: 2.5%;
+    left: 0%;
+    width: 88px;
+    z-index: 12;
+    display: block !important;
+    opacity: 0.94;
+  }
+
+  /* Right Side: Dark Handbag & Elegant Dress visible and framing the card */
+  .item-handbag-dark {
+    top: 2.5%;
+    right: 0%;
+    width: 82px;
+    z-index: 11;
+    display: block !important;
+    opacity: 0.94;
+  }
+
+  .item-dress-elegant {
+    bottom: 2%;
+    right: 0%;
+    width: 96px;
+    z-index: 8;
+    display: block !important;
+    opacity: 0.88;
+  }
+
+  .item-sunglasses {
+    display: none;
+  }
+
+  .caramel-footer {
+    padding: 0.65rem 3.8rem 1.1rem;
+  }
+
+  .footer-copyright-line,
+  .footer-developer-line {
+    font-size: 0.7rem;
+  }
+
+  .caramel-floating-chat-wrap {
+    bottom: 0.85rem;
+    left: 0.85rem;
+  }
+
+  .caramel-floating-whatsapp-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 1.15rem;
   }
 }
 

@@ -106,9 +106,11 @@ export const FashionParallax: React.FC<FashionParallaxProps> = ({ children }) =>
         const config = FASHION_OBJECTS[index];
         if (!config) return;
 
-        const moveX = x * config.depthX;
-        const moveY = y * config.depthY;
-        const rot = x * config.rotateDeg;
+        const w = window.innerWidth;
+        const motionFactor = w < 768 ? 0.35 : w < 1024 ? 0.65 : 1.0;
+        const moveX = x * config.depthX * motionFactor;
+        const moveY = y * config.depthY * motionFactor;
+        const rot = x * config.rotateDeg * motionFactor;
 
         el.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, 0) rotate(${rot.toFixed(2)}deg)`;
       });
